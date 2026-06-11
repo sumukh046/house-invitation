@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code - Gruha Pravesha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Kannada:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f0e8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .info-banner {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin-bottom: 30px;
+            max-width: 500px;
+            text-align: center;
+            font-size: 14px;
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .info-banner strong { color: #664d03; }
+        .info-banner a { color: #0d6efd; }
+
+        .qr-print-card {
+            background: white;
+            border-radius: 24px;
+            padding: 48px 40px;
+            box-shadow: 0 20px 60px rgba(92, 26, 27, 0.12);
+            border: 2px solid #D4A853;
+            text-align: center;
+            max-width: 420px;
+            position: relative;
+        }
+
+        .qr-print-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            height: 6px;
+            background: linear-gradient(90deg, #D4A853, #E8731A, #D4A853);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .om { font-size: 32px; margin-bottom: 8px; }
+        
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #5C1A1B;
+            margin-bottom: 4px;
+        }
+
+        .kannada {
+            font-family: 'Noto Sans Kannada', sans-serif;
+            font-size: 16px;
+            color: #B8860B;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: #6B5B4F;
+            margin-bottom: 6px;
+        }
+
+        .dates {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #E8731A;
+            margin-bottom: 20px;
+        }
+
+        .qr-wrapper {
+            display: inline-block;
+            padding: 16px;
+            border: 3px solid #D4A853;
+            border-radius: 16px;
+            background: white;
+            margin-bottom: 20px;
+        }
+
+        .qr-wrapper img {
+            display: block;
+        }
+
+        .scan-text {
+            font-size: 14px;
+            font-weight: 600;
+            color: #5C1A1B;
+            margin-bottom: 4px;
+        }
+
+        .scan-sub {
+            font-size: 11px;
+            color: #6B5B4F;
+            line-height: 1.5;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #D4A853, transparent);
+            margin: 16px auto;
+        }
+
+        .features {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .feature {
+            font-size: 11px;
+            color: #6B5B4F;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .diya { font-size: 20px; margin-top: 16px; display: block; }
+
+        .actions {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #5C1A1B, #3A0F10);
+            color: #F0D78C;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #5C1A1B;
+            border: 2px solid #D4A853;
+        }
+
+        .btn-print {
+            background: linear-gradient(135deg, #D4A853, #B8860B);
+            color: white;
+        }
+
+        .step-note {
+            margin-top: 24px;
+            font-size: 12px;
+            color: #6B5B4F;
+            max-width: 500px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .info-banner, .actions, .step-note { display: none; }
+            .qr-print-card { box-shadow: none; border: 2px solid #D4A853; }
+        }
+    </style>
+</head>
+<body>
+    <div class="info-banner" style="background: #d4edda; border-color: #28a745; color: #155724;">
+        ✅ <strong>Your invitation is LIVE!</strong><br>
+        <a href="https://gruha-pravesha.netlify.app/" target="_blank" style="color: #0d6efd;">https://gruha-pravesha.netlify.app/</a><br>
+        The QR code below opens this page. Print it on your invitation card!
+    </div>
+
+    <div class="qr-print-card">
+        <div class="om">🕉️</div>
+        <div class="title">Gruha Pravesha</div>
+        <div class="kannada">ಗೃಹ ಪ್ರವೇಶ</div>
+        <div class="subtitle">House Inauguration Ceremony</div>
+        <div class="dates">July 2 & 3, 2026</div>
+
+        <div class="qr-wrapper">
+            <!-- 
+                CURRENT: QR encodes your Google Maps location directly.
+                AFTER HOSTING: Replace the 'data' parameter URL with your hosted page URL.
+                Example: If your Netlify URL is https://gruha-pravesha.netlify.app
+                Replace the encoded URL in the src below.
+            -->
+            <img 
+                src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fgruha-pravesha.netlify.app%2F&color=3A-0F-10&bgcolor=FF-FF-FF&margin=0&format=png&qzone=2"
+                alt="QR Code - Scan for Gruha Pravesha Invitation"
+                width="250"
+                height="250"
+                id="qr-img"
+            >
+        </div>
+
+        <div class="scan-text">📱 Scan to Get Location</div>
+        <div class="scan-sub">
+            Opens Google Maps with directions<br>
+            + Book rides via Uber, Ola, Rapido, Namma Yatri
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="features">
+            <span class="feature">📍 Maps</span>
+            <span class="feature">🚗 Uber</span>
+            <span class="feature">🟢 Ola</span>
+            <span class="feature">⚡ Rapido</span>
+            <span class="feature">🔵 Namma Yatri</span>
+        </div>
+
+        <span class="diya">🪔</span>
+    </div>
+
+    <div class="actions">
+        <a class="btn btn-primary" href="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=https%3A%2F%2Fgruha-pravesha.netlify.app%2F&color=3A-0F-10&bgcolor=FF-FF-FF&margin=2&format=png&qzone=3" download="gruha-pravesha-qr.png" target="_blank">
+            📥 Download QR (High-Res PNG)
+        </a>
+        <button class="btn btn-print" onclick="window.print()">
+            🖨️ Print This Card
+        </button>
+    </div>
+
+    <div class="step-note">
+        <strong>🚀 To host your full invitation page (FREE):</strong><br>
+        1. Go to <a href="https://app.netlify.com/drop" target="_blank">app.netlify.com/drop</a><br>
+        2. Drag & drop your <strong>"home qr"</strong> folder<br>
+        3. Copy the URL you get (e.g., https://xyz.netlify.app)<br>
+        4. Come back here and I'll update the QR to point to that URL!
+    </div>
+</body>
+</html>
